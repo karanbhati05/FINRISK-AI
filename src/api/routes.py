@@ -218,14 +218,29 @@ def explain_prediction(
 ):
     """Return prediction with SHAP-based explanation."""
     df = _customer_to_df(customer)
-    proba = _run_pipeline(df, model, preprocessor, feature_engineer)[0]
+    df_feat = df
+    if feature_engineer is not None:
+        try:
+            df_feat = feature_engineer.transform(df)
+        except Exception:
+            pass
+
+    X_proc = df_feat
+    if preprocessor is not None:
+        try:
+            X_proc = preprocessor.transform(df_feat)
+        except Exception:
+            pass
+
+    probas = model.predict_proba(X_proc)
+    proba = float(probas[0, 1] if probas.ndim == 2 else probas[0])
 
     explainer = get_explainer()
     if explainer is None:
         raise HTTPException(status_code=503, detail="SHAP explainer not available. Train with SHAP enabled.")
 
     try:
-        explanation = explainer.explain_prediction(df)
+        explanation = explainer.explain_prediction(X_proc)
     except Exception as exc:
         raise HTTPException(status_code=500, detail=f"Explanation failed: {exc}")
 

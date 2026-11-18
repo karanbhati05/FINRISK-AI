@@ -44,6 +44,9 @@ htmlcov/
 .env
 .env.local
 
+# MLflow ephemeral local test runs
+mlruns/
+
 # Operating System files
 .DS_Store
 Thumbs.db
