@@ -1,0 +1,54 @@
+{
+  "report_timestamp": "2026-11-18T08:30:29.010339+00:00",
+  "data_drift": {
+    "is_drifted": true,
+    "drift_score": 0.833333,
+    "drifted_features": [
+      "LIMIT_BAL"
+    ],
+    "per_feature_scores": {
+      "LIMIT_BAL": {
+        "test": "ks",
+        "statistic": 0.79,
+        "p_value": 0.0,
+        "is_drifted": "True"
+      },
+      "AGE": {
+        "test": "ks",
+        "statistic": 0.0,
+        "p_value": 1.0,
+        "is_drifted": "False"
+      },
+      "BILL_AMT1": {
+        "test": "ks",
+        "statistic": 0.0,
+        "p_value": 1.0,
+        "is_drifted": "False"
+      },
+      "SEX": {
+        "test": "chi2",
+        "statistic": 0.0,
+        "p_value": 1.0,
+        "is_drifted": "False"
+      },
+      "EDUCATION": {
+        "test": "chi2",
+        "statistic": 0.0,
+        "p_value": 1.0,
+        "is_drifted": "False"
+      },
+      "MARRIAGE": {
+        "test": "chi2",
+        "statistic": 0.0,
+        "p_value": 1.0,
+        "is_drifted": "False"
+      }
+    }
+  },
+  "is_drifted": true,
+  "drift_score": 0.833333,
+  "drifted_features": [
+    "LIMIT_BAL"
+  ],
+  "num_new_samples": 100
+}

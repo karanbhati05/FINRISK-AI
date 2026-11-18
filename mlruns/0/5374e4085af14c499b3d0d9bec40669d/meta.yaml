@@ -1,0 +1,15 @@
+artifact_uri: file:///D:/NEW%20PROJECTS/FINRISK%20AI/mlruns/0/5374e4085af14c499b3d0d9bec40669d/artifacts
+end_time: 1794990588731
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 5374e4085af14c499b3d0d9bec40669d
+run_name: eval-xgb
+run_uuid: 5374e4085af14c499b3d0d9bec40669d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1794990588660
+status: 3
+tags: []
+user_id: bhati

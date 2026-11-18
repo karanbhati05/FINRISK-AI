@@ -1,0 +1,15 @@
+artifact_uri: file:///D:/NEW%20PROJECTS/FINRISK%20AI/mlruns/0/6c7e7a77af4e427d84647b1b382187cf/artifacts
+end_time: 1794991567550
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 6c7e7a77af4e427d84647b1b382187cf
+run_name: gentle-rook-327
+run_uuid: 6c7e7a77af4e427d84647b1b382187cf
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1794991567245
+status: 3
+tags: []
+user_id: bhati

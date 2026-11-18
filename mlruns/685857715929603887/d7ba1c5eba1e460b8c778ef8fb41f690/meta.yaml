@@ -1,0 +1,15 @@
+artifact_uri: file:///D:/NEW%20PROJECTS/FINRISK%20AI/mlruns/685857715929603887/d7ba1c5eba1e460b8c778ef8fb41f690/artifacts
+end_time: 1794991348552
+entry_point_name: ''
+experiment_id: '685857715929603887'
+lifecycle_stage: active
+run_id: d7ba1c5eba1e460b8c778ef8fb41f690
+run_name: eval-XGB_ClassWeight
+run_uuid: d7ba1c5eba1e460b8c778ef8fb41f690
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1794991348485
+status: 3
+tags: []
+user_id: bhati

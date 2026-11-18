@@ -1,0 +1,15 @@
+artifact_uri: file:///D:/NEW%20PROJECTS/FINRISK%20AI/mlruns/0/63123d97134f46d09884f57ae4cb9f85/artifacts
+end_time: 1794990826726
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 63123d97134f46d09884f57ae4cb9f85
+run_name: rogue-perch-808
+run_uuid: 63123d97134f46d09884f57ae4cb9f85
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1794990826320
+status: 3
+tags: []
+user_id: bhati

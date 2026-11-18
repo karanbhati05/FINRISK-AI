@@ -1,0 +1,56 @@
+version: "3.9"
+
+services:
+  # ---- FinRisk AI REST API ----
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: finrisk-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models:/app/models:ro
+      - ./data:/app/data:ro
+      - ./outputs:/app/outputs
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/v1/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  # ---- MLflow Tracking Server ----
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v2.9.2
+    container_name: finrisk-mlflow
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./mlruns:/mlflow/mlruns
+    command: >
+      mlflow server
+      --host 0.0.0.0
+      --port 5000
+      --backend-store-uri sqlite:///mlflow/mlruns/mlflow.db
+      --default-artifact-root /mlflow/mlruns
+    restart: unless-stopped
+
+  # ---- Streamlit Interactive Dashboard ----
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: finrisk-dashboard
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./models:/app/models:ro
+      - ./data:/app/data:ro
+      - ./outputs:/app/outputs
+      - ./app.py:/app/app.py:ro
+    command: ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+    restart: unless-stopped
+

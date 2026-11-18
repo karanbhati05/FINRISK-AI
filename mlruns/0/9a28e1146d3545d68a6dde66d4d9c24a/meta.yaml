@@ -1,0 +1,15 @@
+artifact_uri: file:///D:/NEW%20PROJECTS/FINRISK%20AI/mlruns/0/9a28e1146d3545d68a6dde66d4d9c24a/artifacts
+end_time: 1794990588355
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 9a28e1146d3545d68a6dde66d4d9c24a
+run_name: chill-kite-598
+run_uuid: 9a28e1146d3545d68a6dde66d4d9c24a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1794990587920
+status: 3
+tags: []
+user_id: bhati
