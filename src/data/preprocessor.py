@@ -164,6 +164,18 @@ class DataPreprocessor:
         )
         return self
 
+    def _fix_sklearn_compatibility(self) -> None:
+        """Patch unpickled sklearn SimpleImputers for forward compatibility with sklearn >= 1.5."""
+        if hasattr(self, "_pipeline") and hasattr(self._pipeline, "transformers_"):
+            for _, trans, _ in self._pipeline.transformers_:
+                if hasattr(trans, "named_steps"):
+                    for _, step_obj in trans.named_steps.items():
+                        if hasattr(step_obj, "statistics_") and not hasattr(step_obj, "_fill_dtype"):
+                            try:
+                                step_obj._fill_dtype = getattr(step_obj.statistics_, "dtype", None)
+                            except Exception:
+                                pass
+
     def transform(self, X: pd.DataFrame) -> np.ndarray:
         """Transform data using the fitted pipeline.
 
@@ -179,6 +191,7 @@ class DataPreprocessor:
         """
         if not self._fitted:
             raise RuntimeError("DataPreprocessor has not been fitted yet.")
+        self._fix_sklearn_compatibility()
         X = self._clean(X)
         return self._pipeline.transform(X)
 
@@ -213,5 +226,6 @@ class DataPreprocessor:
         obj = joblib.load(path)
         if not isinstance(obj, cls):
             raise TypeError(f"Expected DataPreprocessor, got {type(obj).__name__}")
+        obj._fix_sklearn_compatibility()
         logger.info("Preprocessor loaded from %s", path)
         return obj

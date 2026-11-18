@@ -144,7 +144,18 @@ def load_ml_artifacts() -> Dict[str, Any]:
     if (models_dir / "best_model.joblib").exists():
         artifacts["model"] = joblib.load(models_dir / "best_model.joblib")
     if (models_dir / "preprocessor.joblib").exists():
-        artifacts["preprocessor"] = joblib.load(models_dir / "preprocessor.joblib")
+        prep = joblib.load(models_dir / "preprocessor.joblib")
+        # Ensure forward compatibility across scikit-learn versions (e.g. sklearn >= 1.5 _fill_dtype)
+        if hasattr(prep, "_fix_sklearn_compatibility"):
+            prep._fix_sklearn_compatibility()
+        pipeline = getattr(prep, "_pipeline", prep)
+        if hasattr(pipeline, "transformers_"):
+            for _, trans, _ in pipeline.transformers_:
+                if hasattr(trans, "named_steps"):
+                    for _, step in trans.named_steps.items():
+                        if hasattr(step, "statistics_") and not hasattr(step, "_fill_dtype"):
+                            step._fill_dtype = getattr(step.statistics_, "dtype", None)
+        artifacts["preprocessor"] = prep
     if (models_dir / "feature_engineer.joblib").exists():
         artifacts["feature_engineer"] = joblib.load(models_dir / "feature_engineer.joblib")
     if (models_dir / "segmenter.joblib").exists():
